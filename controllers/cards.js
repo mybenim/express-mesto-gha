@@ -9,9 +9,9 @@ module.exports.addCard = (req, res, next) => {
     .then((card) => res.status(201).send(card))
     .catch((error) => {
       if (error.name === 'ValidationError') {
-        next(new BadRequest('Переданы некорректные данные при создании карточки'));
+        next(new BadRequest({ message: 'Переданы некорректные данные при создании карточки' }));
       } else {
-        next(new ServerError('На сервере произошла ошибка'));
+        res.status(ServerError).send({ message: 'На сервере произошла ошибка' });
       }
     });
 };
@@ -28,17 +28,17 @@ module.exports.deleteCard = (req, res, next) => {
   return Card.findByIdAndDelete(cardId)
     .then((card) => {
       if (!card) {
-        res.status(NotFound).send({ message: 'Карточка не найдена.' });
+        res.status(404).send({ message: 'Карточка не найдена.' });
         return;
       }
       if (!card.owner.equals(req.user._id)) {
-        next(new ServerError('На сервере произошла ошибка'));
+        next(new ServerError({ message: 'На сервере произошла ошибка' }));
       }
-      res.send({ message: 'Карточка успешно удалена' });
+      res.status(200).send({ message: 'Карточка успешно удалена' });
     })
     .catch((error) => {
       if (error.name === 'CastError') {
-        return next(new BadRequest('Переданы некорректные данные'));
+        res.status(BadRequest).send({ message: 'Переданы некорректные данные' });
       }
       return next(error);
     });
