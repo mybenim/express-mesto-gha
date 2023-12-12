@@ -1,0 +1,26 @@
+{
+  "name": "13pr",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon --experimental-modules --es-module-specifier-resolution=node --trace-warnings --inspect -- app.js",
+    "lint": "npx eslint .",
+    "lintfix": "npx eslint . --fix"
+  },
+  "keywords": [],
+  "author": "Инна Головко",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.54.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "nodemon": "^3.0.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.2"
+  }
+}
