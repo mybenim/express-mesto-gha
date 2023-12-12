@@ -10,10 +10,7 @@ app.use(bodyParser.json()); // для собирания JSON-формата
 app.use(bodyParser.urlencoded({ extended: true })); // для приёма веб-страниц внутри POST-запроса
 
 // подключаемся к серверу mongo
-mongoose.connect(DB_URL, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-});
+mongoose.connect(DB_URL);
 
 app.use((req, res, next) => {
   req.user = {
