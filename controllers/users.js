@@ -1,7 +1,7 @@
 const User = require('../models/user');
-const BadRequest = require('../errors/BadRequest');   // 400
-const NotFound = require('../errors/NotFound');       // 404
-const ServerError = require('../errors/ServerError'); // 500
+const BadRequest = require('../errors/BadRequest');
+const NotFound = require('../errors/NotFound');
+const ServerError = require('../errors/ServerError');
 
 module.exports.getUsers = (req, res, next) => {
   User.find({}) // найти всех
