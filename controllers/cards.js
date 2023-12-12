@@ -18,7 +18,7 @@ module.exports.addCard = (req, res, next) => {
 
 module.exports.getCards = (req, res, next) => {
   Card.find({}) // все карточки
-    .populate()
+    .populate('express-rate-limit')
     .then((cards) => res.send(cards))
     .catch(next);
 };
