@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
-
 const app = express();
 
 app.use(bodyParser.json()); // для собирания JSON-формата
@@ -27,6 +26,3 @@ app.use('*', (req, res) => {
 });
 
 app.listen(PORT);
-
-// Не понимаю, как работают тесты, получается, тест записывает все рабочие моменты..
-// Сейчас, вроде, всё работает, откуда тогда ошибки?

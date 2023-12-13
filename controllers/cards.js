@@ -10,7 +10,7 @@ module.exports.addCard = (req, res) => {
     .then((card) => res.status(201).send(card))
     .catch((error) => {
       if (error.name === 'ValidationError') {
-        res.status(BadRequestError).json('Переданы некорректные данные при создании карточки.');
+        res.status(BadRequestError).json({ message: 'Переданы некорректные данные при создании карточки.' });
       } else {
         res.status(ServerError).json({ message: 'На сервере произошла ошибка.' });
       }
@@ -19,7 +19,7 @@ module.exports.addCard = (req, res) => {
 
 module.exports.getCards = (req, res) => {
   Card.find({}) // все карточки
-    .populate(['owner', 'likes']) // не получилось разобраться, к сожалению :( , потребуется время
+    .populate(['owner', 'likes'])
     .then((cards) => res.send({ cards }))
     .catch(() => res.status(ServerError).send({ message: 'На сервере произошла ошибка.' }));
 };
@@ -40,6 +40,8 @@ module.exports.deleteCard = (req, res) => {
     .catch((error) => {
       if (error.name === 'CastError') {
         res.status(BadRequestError).send({ message: 'Переданы некорректные данные.' });
+      } else {
+        res.status(ServerError).json({ message: 'На сервере произошла ошибка.' });
       }
     });
 };
@@ -52,9 +54,9 @@ module.exports.likeCard = (req, res) => {
   )
     .then((card) => {
       if (!card) {
-        res.status(NotFoundError).send({ message: 'Карточка не найдена.' });
+        return res.status(NotFoundError).send({ message: 'Карточка не найдена.' });
       }
-      res.send({ data: card });
+      return res.send({ data: card });
     })
     .catch((error) => {
       if (error.name === 'CastError') {
@@ -73,14 +75,15 @@ module.exports.dislikeCard = (req, res) => {
   )
     .then((card) => {
       if (!card) {
-        res.status(NotFoundError).send({ message: 'Карточка не найдена.' });
+        return res.status(NotFoundError).send({ message: 'Карточка не найдена.' });
       }
-      res.send({ data: card });
+      return res.send({ data: card });
     })
     .catch((error) => {
       if (error.name === 'CastError') {
         res.status(BadRequestError).send({ message: 'Переданы некорректные данные.' });
+      } else {
+        res.status(ServerError).send({ message: 'На сервере произошла ошибка.' });
       }
-      res.status(ServerError).send({ message: 'На сервере произошла ошибка.' });
     });
 };
