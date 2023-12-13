@@ -19,7 +19,7 @@ module.exports.addCard = (req, res) => {
 
 module.exports.getCards = (req, res) => {
   Card.find({}) // все карточки
-    .populate(['owner', 'likes']) // не получилось разобраться :( , потребуется время, пока его нет. сроки!
+    .populate(['owner', 'likes']) // не получилось разобраться, к сожалению :( , потребуется время
     .then((cards) => res.send({ cards }))
     .catch(() => res.status(ServerError).send({ message: 'На сервере произошла ошибка' }));
 };
