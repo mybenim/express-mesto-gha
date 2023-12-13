@@ -7,7 +7,7 @@ const ServerError = 500;
 module.exports.getUsers = (req, res) => {
   User.find({}) // найти всех
     .then((users) => res.send({ users }))
-    .catch(() => res.status(ServerError).send({ message: 'На сервере произошла ошибка' }));
+    .catch(() => res.status(ServerError).send({ message: 'На сервере произошла ошибка.' }));
 };
 
 module.exports.addUser = (req, res) => {
@@ -18,7 +18,7 @@ module.exports.addUser = (req, res) => {
       if (error.name === 'ValidationError') {
         res.status(BadRequestError).json({ message: 'Переданы некорректные данные.' });
       } else {
-        res.status(ServerError).send({ message: 'На сервере произошла ошибка.' });
+        res.status(ServerError).json({ message: 'На сервере произошла ошибка.' });
       }
     });
 };
@@ -50,7 +50,7 @@ module.exports.editUserData = (req, res) => {
   )
     .then((user) => {
       if (!user) {
-        res.status(NotFoundError).json({ message: 'Пользователь не найден' });
+        res.status(NotFoundError).json({ message: 'Пользователь не найден.' });
       }
       res.status(200).send(user);
     })
@@ -58,7 +58,7 @@ module.exports.editUserData = (req, res) => {
       if (error.name === 'ValidationError' || error.name === 'CastError') {
         res.status(BadRequestError).json({ message: 'Переданы некорректные данные при обновлении профиля.' });
       } else {
-        res.status(ServerError).json({ message: 'На сервере произошла ошибка' });
+        res.status(ServerError).json({ message: 'На сервере произошла ошибка.' });
       }
     });
 };
@@ -75,7 +75,7 @@ module.exports.editUserAvatar = (req, res) => {
       if (error.name === 'ValidationError' || error.name === 'CastError') {
         res.status(BadRequestError).send({ message: 'Переданы некорректные данные при обновлении фото.' });
       } else {
-        res.status(ServerError).send({ message: 'На сервере произошла ошибка' });
+        res.status(ServerError).send({ message: 'На сервере произошла ошибка.' });
       }
     });
 };
