@@ -12,7 +12,7 @@ module.exports.addCard = (req, res) => {
       if (error.name === 'ValidationError') {
         res.status(BadRequestError).send('Переданы некорректные данные при создании карточки');
       } else {
-        res.status(ServerError).send({ message: 'На сервере произошла ошибка' });s
+        res.status(ServerError).send({ message: 'На сервере произошла ошибка' });
       }
     });
 };
