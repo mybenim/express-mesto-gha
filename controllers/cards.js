@@ -1,4 +1,5 @@
 const { HTTP_STATUS_OK, HTTP_STATUS_CREATED } = require('http2').constants;
+const mongoose = require('mongoose');
 const Card = require('../models/card');
 // const { StatusCodes } = require('http-status-codes')
 const BadRequestError = require('../errors/BadRequestError');
@@ -54,15 +55,15 @@ module.exports.likeCard = (req, res, next) => {
     { $addToSet: { likes: req.user._id } }, // добавить _id в массив
     { new: true },
   )
+    .orFail()
+    .populate(['owner', 'likes'])
     .then((card) => {
-      if (!card) {
-        next(new NotFoundError('Карточка не найдена.'));
-        // return res.status(NotFoundError).send({ message: 'Карточка не найдена.' });
-      }
-      return res.send({ data: card });
+      res.status(HTTP_STATUS_OK).send(card);
     })
     .catch((error) => {
-      if (error.name === 'CastError') {
+      if (error instanceof mongoose.Error.DocumentNotFoundError) {
+        next(new NotFoundError('Карточка не найдена.'));
+      } else if (error.name === 'CastError') {
         next(new BadRequestError(error.message));
       } else {
         next(error);
@@ -76,14 +77,15 @@ module.exports.dislikeCard = (req, res, next) => {
     { $pull: { likes: req.user._id } }, // убрать _id из массива
     { new: true },
   )
+    .orFail()
+    .populate(['owner', 'likes'])
     .then((card) => {
-      if (!card) {
-        next(new NotFoundError('Карточка не найдена.'));
-      }
-      return res.send({ data: card });
+      res.status(HTTP_STATUS_OK).send(card);
     })
     .catch((error) => {
-      if (error.name === 'CastError') {
+      if (error instanceof mongoose.Error.DocumentNotFoundError) {
+        next(new NotFoundError('Карточка не найдена.'));
+      } else if (error.name === 'CastError') {
         next(new BadRequestError(error.message));
       } else {
         next(error);

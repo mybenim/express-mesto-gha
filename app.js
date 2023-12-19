@@ -13,7 +13,7 @@ mongoose.connect(DB_URL);
 
 app.use((req, res, next) => {
   req.user = {
-    _id: '6577eac0af30b949edebc3bb', // _id созданного пользователя
+    _id: '6581a8afd38fc9f6617c4b1f', // _id созданного пользователя
   };
   next();
 });
