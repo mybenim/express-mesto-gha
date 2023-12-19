@@ -80,7 +80,7 @@ module.exports.dislikeCard = (req, res, next) => {
       if (!card) {
         next(new NotFoundError('Карточка не найдена.'));
       }
-      // return res.send({ data: card });
+      return res.send({ data: card });
     })
     .catch((error) => {
       if (error.name === 'CastError') {
