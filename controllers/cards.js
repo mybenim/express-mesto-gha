@@ -41,10 +41,8 @@ module.exports.deleteCard = (req, res, next) => {
     .catch((error) => {
       if (error.name === 'CastError') {
         next(new BadRequestError(error.message));
-        // res.status(BadRequestError).send({ message: 'Переданы некорректные данные.' });
       } else {
         next(error);
-        // res.status(ServerError).json({ message: 'На сервере произошла ошибка.' });
       }
     });
 };
