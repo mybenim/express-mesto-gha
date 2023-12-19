@@ -30,7 +30,6 @@ module.exports.deleteCard = (req, res, next) => {
     .then((card) => {
       if (!card) {
         next(new NotFoundError('Карточка не найдена.'));
-        // res.status(NotFoundError).send({ message: 'Карточка не найдена.' });
         return;
       }
       if (!card.owner.equals(req.user._id)) {
