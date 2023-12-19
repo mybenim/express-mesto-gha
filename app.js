@@ -25,4 +25,16 @@ app.use('*', (req, res) => {
   res.status(404).send({ message: 'Что-то пошло не так :(' });
 });
 
+app.use((error, req, res, next) => {
+  // если у ошибки нет статуса, выставляем 500
+  const { statusCode = 500, message } = error;
+  res.status(statusCode).send({
+    // проверяем статус и выставляем сообщение в зависимости от него
+    message: statusCode === 500
+      ? 'На сервере произошла ошибка'
+      : message,
+  });
+  next();
+});
+
 app.listen(PORT);
