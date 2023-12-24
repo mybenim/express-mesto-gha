@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
-// const { get } = require('mongoose');
 const urlRegex = require('../utils/constants');
 const {
   addCard, getCards, deleteCard, likeCard, dislikeCard,

@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
+const depcheck = require('depcheck');
 const rateLimit = require('express-rate-limit');
 const { errors } = require('celebrate');
 const errorHandler = require('./middlewares/errorHandler');
@@ -19,6 +20,8 @@ const limiter = rateLimit({
 app.use(limiter); // подключаем rate-limiter
 
 app.use(helmet());
+
+app.use(depcheck());
 
 app.use('/', require('./routes/index'));
 

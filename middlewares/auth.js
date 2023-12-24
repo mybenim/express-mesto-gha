@@ -4,7 +4,7 @@ const UnautorizedError = require('../errors/UnautorizedError');
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
   if (!authorization || !authorization.startsWith('Bearer ')) {
-    throw new UnautorizedError('Необходима авторизация');
+    throw new UnautorizedError('Необходима авторизация.');
     // return res
     // .status(UnautorizedError)
     // .send({ message: 'Необходима авторизация' });
@@ -14,7 +14,7 @@ module.exports = (req, res, next) => {
   try { // попытаемся верифицировать токен
     payload = jwt.verify(token, 'secret-key');
   } catch (error) { // отправим ошибку, если не получилось
-    throw new UnautorizedError('Необходима авторизация');
+    throw new UnautorizedError('Необходима авторизация.');
     // return res
     // .status(UnautorizedError)
     // .send({ message: 'Необходима авторизация' });

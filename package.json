@@ -1,5 +1,5 @@
 {
-  "name": "13pr",
+  "name": "14pr",
   "version": "1.0.0",
   "main": "index.js",
   "description": "",
@@ -22,12 +22,11 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "celebrate": "^15.0.3",
+    "depcheck": "^1.4.7",
     "express": "^4.18.2",
     "express-rate-limit": "^7.1.5",
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.0.2",
-    "punycode": "^2.3.1",
-    "validator": "^13.11.0"
+    "mongoose": "^8.0.2"
   }
 }

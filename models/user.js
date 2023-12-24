@@ -7,19 +7,20 @@ const urlRegex = require('../utils/constants');
 const userSchema = new mongoose.Schema({
   name: {
     type: String, // строка
-    default: 'Жак-Ив Кусто',
+    default: 'Ваше имя',
     minlength: [2, 'Минимальная длина поля два символа.'],
     maxlength: [30, 'Максимальная длина поля тридцать символов.'],
   },
   about: {
     type: String,
-    default: 'Исследователь',
+    default: 'О себе',
     minlength: [2, 'Минимальная длина поля два символа.'],
     maxlength: [30, 'Максимальная длина поля тридцать символов.'],
   },
   avatar: {
     type: String,
-    default: 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
+    default: 'https://abrakadabra.fun/uploads/posts/2022-01/thumbs/1642051837_2-abrakadabra-fun-p-cherno-belii-siluet-2.png',
+
     validate: {
       validator(url) { // validator - функция проверки данных. v - значение свойства url
         return urlRegex.test(url);
@@ -36,7 +37,7 @@ const userSchema = new mongoose.Schema({
         // validator.isEmail(email); // не работает :(
         return /^\S+@\S+\.\S+$/.test(email); // https://uibakery.io/regex-library/email-regex-csharp
       },
-      message: 'Введите email',
+      message: 'Введите email.',
     },
   },
   password: {
