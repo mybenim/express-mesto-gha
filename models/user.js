@@ -7,19 +7,19 @@ const urlRegex = require('../utils/constants');
 const userSchema = new mongoose.Schema({
   name: {
     type: String, // строка
-    default: 'Ваше имя',
+    default: 'Жак-Ив Кусто',
     minlength: [2, 'Минимальная длина поля два символа.'],
     maxlength: [30, 'Максимальная длина поля тридцать символов.'],
   },
   about: {
     type: String,
-    default: 'О себе',
+    default: 'Исследователь',
     minlength: [2, 'Минимальная длина поля два символа.'],
     maxlength: [30, 'Максимальная длина поля тридцать символов.'],
   },
   avatar: {
     type: String,
-    default: 'https://abrakadabra.fun/uploads/posts/2022-01/thumbs/1642051837_2-abrakadabra-fun-p-cherno-belii-siluet-2.png',
+    default: 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
 
     validate: {
       validator(url) { // validator - функция проверки данных. v - значение свойства url
