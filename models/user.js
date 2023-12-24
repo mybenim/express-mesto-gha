@@ -7,13 +7,13 @@ const urlRegex = require('../utils/constants');
 const userSchema = new mongoose.Schema({
   name: {
     type: String, // строка
-    default: 'Ваше имя',
+    default: 'Жак-Ив Кусто',
     minlength: [2, 'Минимальная длина поля два символа'],
     maxlength: [30, 'Максимальная длина поля тридцать символов'],
   },
   about: {
     type: String,
-    default: 'О себе',
+    default: 'Исследователь',
     minlength: [2, 'Минимальная длина поля два символа'],
     maxlength: [30, 'Максимальная длина поля тридцать символов'],
   },
