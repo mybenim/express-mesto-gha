@@ -21,8 +21,6 @@ app.use(limiter); // подключаем rate-limiter
 
 app.use(helmet());
 
-app.use(depcheck());
-
 app.use('/', require('./routes/index'));
 
 app.use(errors());
