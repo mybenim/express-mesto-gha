@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
-const depcheck = require('depcheck');
 const rateLimit = require('express-rate-limit');
 const { errors } = require('celebrate');
 const errorHandler = require('./middlewares/errorHandler');
